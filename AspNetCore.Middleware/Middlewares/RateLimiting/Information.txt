@@ -1,0 +1,24 @@
+﻿HttpContext içinde şunlar bulunur:
+
+Request: Gelen HTTP isteğiyle ilgili bilgileri içerir (URL, başlıklar, parametreler, vb.).
+Response: Cevap verilecek HTTP yanıtını temsil eder (durum kodu, başlıklar, içerik vb.).
+Session: Kullanıcıya ait oturum bilgileri.
+User: Kimlik doğrulama ve yetkilendirme bilgileri (örneğin, kullanıcı adı).
+Items: Orta katman (middleware) aracılığıyla veri taşımak için kullanılan koleksiyon.
+
+								örnek kullanım
+
+public async Task InvokeAsync(HttpContext context)
+{
+    // HTTP isteğindeki URL'yi alıyoruz
+    var path = context.Request.Path;
+
+    // İstekten gelen bir başlık bilgisi
+    var userAgent = context.Request.Headers["User-Agent"];
+
+    // Yanıt durum kodunu 200 yapıyoruz (başarılı)
+    context.Response.StatusCode = 200;
+
+    // Sonraki middleware'e geçiyoruz
+    await _next(context);
+}
